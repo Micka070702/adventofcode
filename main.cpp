@@ -50,24 +50,31 @@ size_t isDigitAlpha(const std::string &str, size_t &x)
     return (verif(temp));
 }
 
-size_t catMyNb(const std::string &str)
+std::string findMyDigit(const std::string &str)
 {
-    std::string nb = "";
-    std::string fn = "";
+    std::string nb = "", fn = "";
+
     for (size_t i = 0; i < str.size(); ++i) {
         if (std::isdigit(str[i])) {
             nb += str[i];
         } else if (std::isalpha(str[i])) {
             size_t alphaValue = isDigitAlpha(str, i);
-
             if (alphaValue != 0)
                 nb += std::to_string(alphaValue);
         }
     }
     if (nb.size() == 1)
         nb += nb;
+
     fn += nb[0];
     fn += nb[nb.size() - 1];
+    return (fn);
+}
+
+size_t catMyNb(const std::string &str)
+{
+    std::string fn = (findMyDigit(str));
+
     if (fn.empty()) {
         return 0;
     } else {
